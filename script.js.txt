@@ -1,0 +1,41 @@
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,6}$/;
+
+  if (!name || !email || !message) {
+    alert("All fields are required.");
+    event.preventDefault();
+  } else if (!emailPattern.test(email)) {
+    alert("Please enter a valid email address.");
+    event.preventDefault();
+  }
+});
+
+function addTask() {
+  const taskInput = document.getElementById("taskInput");
+  const taskText = taskInput.value.trim();
+
+  if (taskText !== "") {
+    const li = document.createElement("li");
+    li.textContent = taskText;
+    li.addEventListener("click", () => {
+      li.classList.toggle("completed");
+    });
+
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "Remove";
+    removeBtn.addEventListener("click", () => {
+      li.remove();
+    });
+
+    li.appendChild(removeBtn);
+    document.getElementById("taskList").appendChild(li);
+    taskInput.value = "";
+  } else {
+    alert("Please enter a task.");
+  }
+}
+
